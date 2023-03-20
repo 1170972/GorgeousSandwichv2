@@ -1,24 +1,17 @@
 package pt.isep.arqsoft.GorgeousSandwich.repository.order.wrapper;
 
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.lang.Validate;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.DeliveryTime;
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.Order;
 import pt.isep.arqsoft.GorgeousSandwich.dto.order.DeliveryTimeDTO;
-import pt.isep.arqsoft.GorgeousSandwich.exceptions.InvalidOperationException;
 import pt.isep.arqsoft.GorgeousSandwich.persistence.order.OrderPersistenceJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.order.IOrderRepositoryJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.order.mapper.OrderMapperJPA;
-
-import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.HALF_DAYS;
 
 @Service("OrderRepositoryWrapperJPA")
 public class OrderRepositoryWrapperJPA {
@@ -43,7 +36,7 @@ public class OrderRepositoryWrapperJPA {
 		return this.mapper.convertListToDomain(ordersJPA);
 	}
 
-	public Order update(Order model) throws InvalidOperationException {
+	public Order update(Order model) {
 		if(this.repository.existsById(model.obtainOrderId().obtainID())){
 			this.validateModel(model);
 			OrderPersistenceJPA order = this.mapper.convertToPersistence(model);

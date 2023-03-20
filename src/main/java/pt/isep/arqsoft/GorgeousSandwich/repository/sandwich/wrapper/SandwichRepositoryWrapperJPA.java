@@ -2,8 +2,6 @@ package pt.isep.arqsoft.GorgeousSandwich.repository.sandwich.wrapper;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.Sandwich;

@@ -6,10 +6,6 @@ public class OrderItemDTO {
     
     public Integer quantity;
 
-    public OrderItemDTO(){
-
-    }
-
     public OrderItemDTO(Long sandwichId, Integer quantity){
         this.sandwichId = sandwichId;
         this.quantity = quantity;

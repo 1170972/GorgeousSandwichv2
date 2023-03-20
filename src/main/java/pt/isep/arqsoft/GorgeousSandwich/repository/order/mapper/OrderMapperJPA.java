@@ -43,12 +43,4 @@ public class OrderMapperJPA {
 		return orders;
 	}
 
-	public List<OrderPersistenceJPA> convertListToPersistence(List<Order> domainList) {
-		List<OrderPersistenceJPA> orders = new ArrayList<>();
-		for (Order o : domainList) {
-			orders.add(convertToPersistence(o));
-		}
-		return orders;
-	}
-
 }
