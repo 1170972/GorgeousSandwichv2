@@ -22,13 +22,6 @@ public class OrderStatus implements IValueObject<OrderStatus> {
 	public static OrderStatus valueOf(String name){
 		return new OrderStatus(name);
 	}
-
-	public OrderStatus changeStatus(String name) {
-		Validate.notNull(name, "OrderStatus name must not be null.");
-		Validate.notEmpty(name, "OrderStatus name must not be empty.");
-		Validate.isTrue(!this.name.equals(name),"Can't change to the same status");
-		return new OrderStatus(name);
-	}
 	
 	@Override
 	public boolean equals(Object o) {

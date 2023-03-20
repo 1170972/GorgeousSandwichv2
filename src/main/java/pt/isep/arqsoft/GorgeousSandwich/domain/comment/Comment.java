@@ -18,7 +18,6 @@ public class Comment implements IEntity<Comment> {
 	private CommentID commentId;
 	
 	public Comment(Description description, SandwichID sandwichId, UserEmail email, CommentID commentId) {
-		Validate.noNullElements(new Object [] {description, sandwichId, email, commentId}, "Description, sandwich id and comment id must not be null.");
 		this.description = description;
 		this.sandwichId = sandwichId;
 		this.email = email;
@@ -26,7 +25,6 @@ public class Comment implements IEntity<Comment> {
 	}
 
 	public Comment(Description description, SandwichID sandwichId, UserEmail email) {
-		Validate.noNullElements(new Object [] {description, sandwichId,email}, "Description and sandwich id must not be null.");
 		this.description = description;
 		this.sandwichId = sandwichId;
 		this.email = email;

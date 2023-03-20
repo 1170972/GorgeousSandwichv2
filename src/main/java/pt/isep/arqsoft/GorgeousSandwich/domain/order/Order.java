@@ -29,7 +29,6 @@ public class Order implements IEntity<Order> {
 	private static final int DELIVERY_ENDING = 29;
 	
 	public Order(OrderStatus orderStatus, DeliveryTime deliveryTime, DeliveryDate deliveryDate, OrderDate orderDate, Set<OrderItem> orderItems,UserEmail email) {
-		Validate.noNullElements(new Object [] {orderStatus, deliveryTime, deliveryDate, orderDate, orderItems,email}, "Order status, delivery time, delivery date, order date and order items cannot be null.");
 		Validate.notEmpty(orderItems, "List of OrderItem must not be empty.");
 		Validate.isTrue(deliveryDate.obtainDate().isAfter(orderDate.obtainDate().plusDays(DELIVERY_BEGINNING)) && deliveryDate.obtainDate().isBefore(orderDate.obtainDate().plusDays(DELIVERY_ENDING)),"Delivery date must be up to 3 days after or 28 days after the order date");
 		this.orderStatus = orderStatus;
@@ -41,7 +40,6 @@ public class Order implements IEntity<Order> {
 	}
 
 	public Order(OrderStatus orderStatus, DeliveryTime deliveryTime, DeliveryDate deliveryDate, OrderDate orderDate, OrderID orderId, Set<OrderItem> orderItems, UserEmail email) {
-		Validate.noNullElements(new Object [] {orderStatus, deliveryTime, deliveryDate, orderDate,orderId, orderItems,email}, "Order status, delivery time, delivery date, order date, orderId and order items cannot be null.");
 		Validate.notEmpty(orderItems, "List of OrderItem must not be empty.");
 		Validate.isTrue(deliveryDate.obtainDate().isAfter(orderDate.obtainDate().plusDays(2)) && deliveryDate.obtainDate().isBefore(orderDate.obtainDate().plusDays(29)),"Delivery date must be up to 3 days after or 28 days after the order date");
 		this.orderStatus = orderStatus;
