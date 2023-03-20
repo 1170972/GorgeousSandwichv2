@@ -19,6 +19,7 @@ public class DeliveryTime implements IValueObject<DeliveryTime> {
 		Validate.notNull(startTime, "DeliveryTime start time must not be null.");
 		Validate.notNull(endTime, "DeliveryTime end time must not be null.");
 		Validate.isTrue(endTime.isAfter(startTime), "End time must be after start time.");
+		Validate.isTrue(possibleIntervals.contains(new DeliveryTimeDTO(startTime.toString(), endTime.toString())),"Invalid delivery time interval");
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
