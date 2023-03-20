@@ -26,9 +26,7 @@ public class Description implements IValueObject<Description> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Description other = (Description) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((Description) o);
 	}
 	
 	@Override

@@ -22,14 +22,12 @@ public class CommentController {
 
     @GetMapping("/comments/sandwich/{id}")
     public List<CommentDTO> listBySandwich(@PathVariable(value = "id") Long sandwichId){
-        List<Comment> comments = commentRepository.findBySandwichId(sandwichId);
-        return commentConverter.convertCommentListToDTO(comments);
+        return commentConverter.convertCommentListToDTO(commentRepository.findBySandwichId(sandwichId));
     }
 
     @GetMapping("/comments/email/{id}")
     public List<CommentDTO> listByEmail(@PathVariable(value = "id") String email){
-        List<Comment> comments = commentRepository.findByEmail(email);
-        return commentConverter.convertCommentListToDTO(comments);
+        return commentConverter.convertCommentListToDTO(commentRepository.findByEmail(email));
     }
 
     @PostMapping("/comments")
@@ -38,7 +36,6 @@ public class CommentController {
         if(comment == null){
             throw new IllegalArgumentException("One or more of the input values are wrong");
         }
-        comment = commentRepository.save(comment);
-        return commentConverter.convertToDTO(comment);
+        return commentConverter.convertToDTO(commentRepository.save(comment));
     }
 }

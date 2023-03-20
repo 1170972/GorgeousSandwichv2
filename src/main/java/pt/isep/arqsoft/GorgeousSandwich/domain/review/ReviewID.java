@@ -27,9 +27,7 @@ public class ReviewID implements IValueObject<ReviewID> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    ReviewID other = (ReviewID) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((ReviewID) o);
 	}
 	
 	@Override

@@ -24,14 +24,12 @@ public class ReviewController {
 
     @GetMapping("/reviews/sandwich/{id}")
     public List<ReviewDTO> listBySandwich(@PathVariable(value = "id") Long sandwichId){
-        List<Review> reviews = reviewRepository.findBySandwichId(sandwichId);
-        return reviewConverter.convertReviewListToDTO(reviews);
+        return reviewConverter.convertReviewListToDTO(reviewRepository.findBySandwichId(sandwichId));
     }
 
     @GetMapping("/reviews/email/{id}")
     public List<ReviewDTO> listByEmail(@PathVariable(value = "id") String email){
-        List<Review> reviews = reviewRepository.findByEmail(email);
-        return reviewConverter.convertReviewListToDTO(reviews);
+        return reviewConverter.convertReviewListToDTO(reviewRepository.findByEmail(email));
     }
 
     @GetMapping("reviews/gradeValues")
@@ -45,7 +43,6 @@ public class ReviewController {
         if(review == null){
             throw new IllegalArgumentException("One or more of the input values are wrong");
         }
-        review = reviewRepository.save(review);
-        return reviewConverter.convertToDTO(review);
+        return reviewConverter.convertToDTO(reviewRepository.save(review));
     }
 }

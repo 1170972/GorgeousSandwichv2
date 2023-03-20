@@ -2,8 +2,6 @@ package pt.isep.arqsoft.GorgeousSandwich.domain.review;
 
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.EqualsBuilder;
-
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.IValueObject;
 import pt.isep.arqsoft.GorgeousSandwich.dto.review.GradeDTO;
 
@@ -34,9 +32,7 @@ public class Grade implements IValueObject<Grade>{
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Grade other = (Grade) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((Grade) o);
 	}
 	
 	@Override

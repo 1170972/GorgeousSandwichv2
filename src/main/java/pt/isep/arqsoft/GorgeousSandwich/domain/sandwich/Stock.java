@@ -39,9 +39,7 @@ public class Stock implements IValueObject<Stock> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Stock other = (Stock) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((Stock) o);
 	}
 	
 	@Override

@@ -29,9 +29,7 @@ public class DeliveryDate implements IValueObject<DeliveryDate> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    DeliveryDate other = (DeliveryDate) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((DeliveryDate) o);
 	}
 	
 	@Override

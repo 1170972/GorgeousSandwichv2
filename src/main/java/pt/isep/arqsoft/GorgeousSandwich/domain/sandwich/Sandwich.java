@@ -1,7 +1,5 @@
 package pt.isep.arqsoft.GorgeousSandwich.domain.sandwich;
 
-import org.apache.commons.lang.Validate;
-
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.Description;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.IEntity;
 
@@ -66,9 +64,7 @@ public class Sandwich implements IEntity<Sandwich> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Sandwich other = (Sandwich) o;
-
-	    return sameIdentityAs(other);
+	    return sameIdentityAs((Sandwich) o);
 	}
 	
 	@Override

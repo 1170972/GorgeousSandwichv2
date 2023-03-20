@@ -26,9 +26,7 @@ public class OrderID implements IValueObject<OrderID> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    OrderID other = (OrderID) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((OrderID) o);
 	}
 	
 	@Override

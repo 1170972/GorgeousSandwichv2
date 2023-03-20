@@ -40,15 +40,13 @@ public class OrderController {
 
     @GetMapping("/orders")
     public List<OrderDTO> listAll() {
-        List<Order> orders = orderRepository.findAll();
-        return orderConverter.convertListToDTO(orders);
+        return orderConverter.convertListToDTO(orderRepository.findAll());
     }
 
     @GetMapping("/orders/{id}")
     public ResponseEntity<OrderDTO> getById(@PathVariable(value = "id") Long orderId) throws ResourceNotFoundException{
         try {
-            Order order = orderRepository.getById(orderId);
-            return ResponseEntity.ok().body(orderConverter.convertToDTO(order));
+            return ResponseEntity.ok().body(orderConverter.convertToDTO(orderRepository.getById(orderId)));
         }catch (NoSuchElementException e){
             throw new ResourceNotFoundException("Sandwich not found with id " + orderId);
         }
@@ -56,8 +54,7 @@ public class OrderController {
 
     @GetMapping("/orders/email/{id}")
     public List<OrderDTO> getByEmail(@PathVariable(value = "id") String email) {
-            List<Order> orders = orderRepository.getByEmail(email);
-            return orderConverter.convertListToDTO(orders);
+        return orderConverter.convertListToDTO(orderRepository.getByEmail(email));
     }
 
     @GetMapping("/orders/times")
@@ -70,9 +67,7 @@ public class OrderController {
         checkIfSandwichExists(orderDTO.obtainOrderItems());
         orderDTO.changeOrderStatus("Created");
         orderDTO.changeOrderDate(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        Order order = orderConverter.convertFromDTO(orderDTO);
-        order = orderRepository.save(order);
-        return orderConverter.convertToDTO(order);
+        return orderConverter.convertToDTO(orderRepository.save(orderConverter.convertFromDTO(orderDTO)));
     }
 
     @PutMapping("/orders/{id}")
@@ -85,8 +80,7 @@ public class OrderController {
             DeliveryTimeDTO deliveryTimeDTO = orderDTO.obtainDeliveryTime();
             order.changeDeliveryTime(deliveryTimeDTO.obtainStartTime(),deliveryTimeDTO.obtainEndTime());
             order.changeOrderItems(orderConverter.convertOrderItemsListFromDTO(orderDTO.obtainOrderItems()));
-            order = this.orderRepository.update(order);
-            return ResponseEntity.ok().body(this.orderConverter.convertToDTO(order));
+            return ResponseEntity.ok().body(this.orderConverter.convertToDTO(this.orderRepository.update(order)));
         }catch (NoSuchElementException e){
             throw new ResourceNotFoundException("Order not found with id"+orderId);
         }

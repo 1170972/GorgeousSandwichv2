@@ -27,15 +27,13 @@ public class SandwichController {
 
     @GetMapping("/sandwiches")
     public List<SandwichDTO> listAll() {
-        List<Sandwich> sandwiches = sandwichRepository.findAll();
-        return sandwichConverter.convertListToDTO(sandwiches);
+        return sandwichConverter.convertListToDTO(sandwichRepository.findAll());
     }
 
     @GetMapping("/sandwiches/{id}")
     public ResponseEntity<SandwichDTO> getById(@PathVariable(value = "id") Long sandwichId) throws ResourceNotFoundException{
         try {
-            Sandwich sandwich = sandwichRepository.getById(sandwichId);
-            return ResponseEntity.ok().body(sandwichConverter.convertToDTO(sandwich));
+            return ResponseEntity.ok().body(sandwichConverter.convertToDTO(sandwichRepository.getById(sandwichId)));
         }catch (NoSuchElementException e){
             throw new ResourceNotFoundException("Sandwich not found with id " + sandwichId);
         }
@@ -47,8 +45,7 @@ public class SandwichController {
         if(sandwich == null){
             throw new IllegalArgumentException("One or more of the input values are wrong");
         }
-        sandwich = sandwichRepository.save(sandwich);
-        return sandwichConverter.convertToDTO(sandwich);
+        return sandwichConverter.convertToDTO(sandwichRepository.save(sandwich));
     }
     
     @PutMapping("/sandwiches/{id}")
@@ -56,8 +53,7 @@ public class SandwichController {
         try {
             Sandwich sandwich = sandwichRepository.getById(sandwichId);
             sandwich.changeStock(sandwichDTO.obtainStock());
-            this.sandwichRepository.update(sandwich);
-            return ResponseEntity.ok().body(sandwichConverter.convertToDTO(sandwich));
+            return ResponseEntity.ok().body(sandwichConverter.convertToDTO(this.sandwichRepository.update(sandwich)));
         }catch (NoSuchElementException e){
             throw new ResourceNotFoundException("Sandwich not found with id " + sandwichId);
         }
