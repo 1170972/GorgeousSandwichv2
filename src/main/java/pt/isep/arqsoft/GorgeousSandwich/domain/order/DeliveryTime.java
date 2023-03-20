@@ -40,8 +40,6 @@ public class DeliveryTime implements IValueObject<DeliveryTime> {
 	}
 
 	public DeliveryTime changeDeliveryTime(LocalTime start, LocalTime end){
-		Validate.notNull(start, "DeliveryTime start time must not be null.");
-		Validate.notNull(end, "DeliveryTime start time must not be null.");
 		return new DeliveryTime(start,end);
 	}
 	

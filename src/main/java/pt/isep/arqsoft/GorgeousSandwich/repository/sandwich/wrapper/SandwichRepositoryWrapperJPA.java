@@ -1,7 +1,6 @@
 package pt.isep.arqsoft.GorgeousSandwich.repository.sandwich.wrapper;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.Sandwich;
@@ -40,12 +39,8 @@ public class SandwichRepositoryWrapperJPA {
 	}
 
 	public Sandwich update(Sandwich model) {
-		if(this.repository.existsById(model.obtainSandwichID().obtainID())) {
-			SandwichPersistenceJPA sandwichJPA = this.mapper.convertToPersistence(model);
-			return this.mapper.convertToDomain(this.repository.save(sandwichJPA));
-		} else {
-			throw new NoSuchElementException();
-		}
+		SandwichPersistenceJPA sandwichJPA = this.mapper.convertToPersistence(model);
+		return this.mapper.convertToDomain(this.repository.save(sandwichJPA));
 	}
 
 }

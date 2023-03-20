@@ -18,7 +18,6 @@ public class Sandwich implements IEntity<Sandwich> {
 	private SandwichID sandwichId;
 	
 	public Sandwich(Type type, Stock stock, Designation designation, Description description) {
-		Validate.noNullElements(new Object[] {type, stock, designation, description}, "The type, stock, designation and description cannot be null.");
 		this.type = type;
 		this.stock = stock;
 		this.designation = designation;
@@ -26,7 +25,6 @@ public class Sandwich implements IEntity<Sandwich> {
 	}
 
 	public Sandwich(Type type, Stock stock, Designation designation, Description description, SandwichID sandwichId) {
-		Validate.noNullElements(new Object[] {type, stock, designation, description,sandwichId}, "The type, stock, designation, description and sandwichId cannot be null.");
 		this.type = type;
 		this.stock = stock;
 		this.designation = designation;

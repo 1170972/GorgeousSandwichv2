@@ -20,7 +20,6 @@ public class Review implements IEntity<Review> {
 	private ReviewID reviewId;
 	
 	public Review(Description description, Grade grade, SandwichID sandwichId, ReviewID reviewId,UserEmail email) {
-		Validate.noNullElements(new Object [] {description, grade, sandwichId, reviewId,email}, "Description, grade, sandwich id and review id must not be null.");
 		this.description = description;
 		this.grade = grade;
 		this.sandwichId = sandwichId;
@@ -30,7 +29,6 @@ public class Review implements IEntity<Review> {
 
 	
 	public Review(Description description, Grade grade, SandwichID sandwichId,UserEmail email) {
-		Validate.noNullElements(new Object [] {description, grade, sandwichId,email}, "Description, grade and sandwich id must not be null.");
 		this.description = description;
 		this.grade = grade;
 		this.sandwichId = sandwichId;

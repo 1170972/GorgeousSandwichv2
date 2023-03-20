@@ -1,7 +1,6 @@
 package pt.isep.arqsoft.GorgeousSandwich.repository.order.wrapper;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.apache.commons.lang.Validate;
 import org.springframework.stereotype.Service;
@@ -37,13 +36,9 @@ public class OrderRepositoryWrapperJPA {
 	}
 
 	public Order update(Order model) {
-		if(this.repository.existsById(model.obtainOrderId().obtainID())){
-			this.validateModel(model);
-			OrderPersistenceJPA order = this.mapper.convertToPersistence(model);
-			return this.mapper.convertToDomain(this.repository.save(order));
-		}else {
-			throw  new NoSuchElementException();
-		}
+		this.validateModel(model);
+		OrderPersistenceJPA order = this.mapper.convertToPersistence(model);
+		return this.mapper.convertToDomain(this.repository.save(order));
 	}
 
 	public Order getById(Long Id) {
