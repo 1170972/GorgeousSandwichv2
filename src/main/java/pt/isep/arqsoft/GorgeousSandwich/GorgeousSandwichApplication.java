@@ -40,7 +40,7 @@ public class GorgeousSandwichApplication {
 			LocalTime end = hours.plusMinutes(interval);
 			list.add(new DeliveryTimeDTO(hours.toString(),end.toString()));
 			if(end.plusMinutes(interval).isAfter(closingHours)){
-				list.get(list.size()-1).changeEndTime(closingHours.toString());
+				list.get(list.size()-1).endTime = closingHours.toString();
 				break;
 			}
 			hours=end;

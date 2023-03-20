@@ -1,8 +1,10 @@
 package pt.isep.arqsoft.GorgeousSandwich.repository.sandwich.wrapper;
 
 import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
+import pt.isep.arqsoft.GorgeousSandwich.domain.comment.Comment;
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.Sandwich;
 import pt.isep.arqsoft.GorgeousSandwich.repository.sandwich.ISandwichRepositoryJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.sandwich.mapper.SandwichMapperJPA;
@@ -37,6 +39,10 @@ public class SandwichRepositoryWrapperJPA {
 
 	public Sandwich update(Sandwich model) {
 		return this.mapper.convertToDomain(this.repository.save(this.mapper.convertToPersistence(model)));
+	}
+
+	public List<Sandwich> findByIds(Set<Long> sandwichIds) {
+		return this.mapper.convertListToDomain(this.repository.findAllById(sandwichIds));
 	}
 
 }

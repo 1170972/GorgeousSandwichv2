@@ -1,9 +1,11 @@
 package pt.isep.arqsoft.GorgeousSandwich.controller;
 
+import java.util.TreeSet;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.DeliveryTime;
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.Order;
+import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.Sandwich;
 import pt.isep.arqsoft.GorgeousSandwich.dto.order.DeliveryTimeDTO;
 import pt.isep.arqsoft.GorgeousSandwich.dto.order.OrderConverter;
 import pt.isep.arqsoft.GorgeousSandwich.dto.order.OrderDTO;
@@ -64,9 +66,9 @@ public class OrderController {
 
     @PostMapping("/orders")
     public OrderDTO createOrder(@RequestBody OrderDTO orderDTO){
-        checkIfSandwichExists(orderDTO.obtainOrderItems());
-        orderDTO.changeOrderStatus("Created");
-        orderDTO.changeOrderDate(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        checkIfSandwichExists(orderDTO.orderItems);
+        orderDTO.orderStatus = "Created";
+        orderDTO.orderDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return orderConverter.convertToDTO(orderRepository.save(orderConverter.convertFromDTO(orderDTO)));
     }
 
@@ -77,9 +79,9 @@ public class OrderController {
             if(LocalDate.now().until(order.obtainDeliveryDate().obtainDate(),DAYS) < 5){
                 throw new InvalidOperationException("Cant update order. Less of five days remaining to delivery");
             }
-            DeliveryTimeDTO deliveryTimeDTO = orderDTO.obtainDeliveryTime();
-            order.changeDeliveryTime(deliveryTimeDTO.obtainStartTime(),deliveryTimeDTO.obtainEndTime());
-            order.changeOrderItems(orderConverter.convertOrderItemsListFromDTO(orderDTO.obtainOrderItems()));
+            DeliveryTimeDTO deliveryTimeDTO = orderDTO.deliveryTime;
+            order.changeDeliveryTime(deliveryTimeDTO.startTime, deliveryTimeDTO.endTime);
+            order.changeOrderItems(orderConverter.convertOrderItemsListFromDTO(orderDTO.orderItems));
             return ResponseEntity.ok().body(this.orderConverter.convertToDTO(this.orderRepository.update(order)));
         }catch (NoSuchElementException e){
             throw new ResourceNotFoundException("Order not found with id"+orderId);
@@ -87,10 +89,12 @@ public class OrderController {
     }
 
     private void checkIfSandwichExists(Set<OrderItemDTO> items){
+        Set<Long> sandwichIds = new TreeSet<>();
         for(OrderItemDTO item : items){
-            if(!sandwichRepository.checkIfExists(item.obtainSandwichId())){
-                throw new IllegalArgumentException("Sandwich with id " + item.obtainSandwichId() + " not found");
-            }
+            sandwichIds.add(item.sandwichId);
+        }
+        if(sandwichRepository.findByIds(sandwichIds).size() != sandwichIds.size()){
+            throw new IllegalArgumentException("One or more Sandwiches do not exist");
         }
     }
 }

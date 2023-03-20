@@ -51,11 +51,12 @@ public class Sandwich implements IEntity<Sandwich> {
 	}
 
 	public void changeStock(int value){
-		if(this.stock.obtainUnits() < value){
-			this.stock = stock.addUnits(value-stock.obtainUnits());
+		int units = stock.obtainUnits();
+		if(units < value){
+			this.stock = stock.addUnits(value-units);
 		}
-		if(this.stock.obtainUnits() > value){
-			this.stock = stock.removeUnits(stock.obtainUnits()-value);
+		if(units > value){
+			this.stock = stock.removeUnits(units-value);
 		}
 	}
 	

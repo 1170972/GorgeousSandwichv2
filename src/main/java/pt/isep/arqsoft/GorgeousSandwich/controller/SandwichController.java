@@ -52,7 +52,7 @@ public class SandwichController {
     public ResponseEntity<SandwichDTO> addUnitsSandwich(@PathVariable(value = "id") Long sandwichId, @RequestBody SandwichDTO sandwichDTO) throws ResourceNotFoundException {
         try {
             Sandwich sandwich = sandwichRepository.getById(sandwichId);
-            sandwich.changeStock(sandwichDTO.obtainStock());
+            sandwich.changeStock(sandwichDTO.stock);
             return ResponseEntity.ok().body(sandwichConverter.convertToDTO(this.sandwichRepository.update(sandwich)));
         }catch (NoSuchElementException e){
             throw new ResourceNotFoundException("Sandwich not found with id " + sandwichId);

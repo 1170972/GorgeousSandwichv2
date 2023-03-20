@@ -25,16 +25,16 @@ public class SandwichConverter {
     }
 
     public static Sandwich convertFromDTO(SandwichDTO sandwichDTO){
-        String type = sandwichDTO.obtainType().toUpperCase();
+        String type = sandwichDTO.type.toUpperCase();
         if(Type.lookupByName(type)== null){
             return null;
         }
-        if(sandwichDTO.obtainSandwichId() == null) {
-            return new Sandwich(Type.valueOf(type), Stock.valueOf(sandwichDTO.obtainStock()),
-                    Designation.valueOf(sandwichDTO.obtainDesignation()), Description.valueOf(sandwichDTO.obtainDescription()));
+        if(sandwichDTO.sandwichId == null) {
+            return new Sandwich(Type.valueOf(type), Stock.valueOf(sandwichDTO.stock),
+                    Designation.valueOf(sandwichDTO.designation), Description.valueOf(sandwichDTO.description));
         }
-        return new Sandwich(Type.valueOf(type), Stock.valueOf(sandwichDTO.obtainStock()),
-                Designation.valueOf(sandwichDTO.obtainDesignation()), Description.valueOf(sandwichDTO.obtainDescription()), SandwichID.valueOf(sandwichDTO.obtainSandwichId()));
+        return new Sandwich(Type.valueOf(type), Stock.valueOf(sandwichDTO.stock),
+                Designation.valueOf(sandwichDTO.designation), Description.valueOf(sandwichDTO.description), SandwichID.valueOf(sandwichDTO.sandwichId));
     }
 
     public static List<SandwichDTO> convertListToDTO(List<Sandwich> sandwichList){

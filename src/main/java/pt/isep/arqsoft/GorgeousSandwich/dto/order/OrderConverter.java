@@ -29,17 +29,17 @@ public class OrderConverter {
     }
 
     public static Order convertFromDTO(OrderDTO orderDTO){
-        DeliveryTimeDTO deliveryTimeDTO = orderDTO.obtainDeliveryTime();
-        if(orderDTO.obtainOrderId()==null){
-            return new Order(OrderStatus.valueOf(orderDTO.obtainOrderStatus()),
-                    DeliveryTime.valueOf(LocalTime.parse(deliveryTimeDTO.obtainStartTime()), LocalTime.parse(deliveryTimeDTO.obtainEndTime())),
-                    DeliveryDate.valueOf(LocalDate.parse(orderDTO.obtainDeliveryDate())),
-                    OrderDate.valueOf(LocalDate.parse(orderDTO.obtainOrderDate())), convertOrderItemsListFromDTO(orderDTO.obtainOrderItems()), UserEmail.valueOf(orderDTO.obtainEmail()));
+        DeliveryTimeDTO deliveryTimeDTO = orderDTO.deliveryTime;
+        if(orderDTO.orderId==null){
+            return new Order(OrderStatus.valueOf(orderDTO.orderStatus),
+                    DeliveryTime.valueOf(LocalTime.parse(deliveryTimeDTO.startTime), LocalTime.parse(deliveryTimeDTO.endTime)),
+                    DeliveryDate.valueOf(LocalDate.parse(orderDTO.deliveryDate)),
+                    OrderDate.valueOf(LocalDate.parse(orderDTO.orderDate)), convertOrderItemsListFromDTO(orderDTO.orderItems), UserEmail.valueOf(orderDTO.email));
         }
-        return new Order(OrderStatus.valueOf(orderDTO.obtainOrderStatus()),
-                DeliveryTime.valueOf(LocalTime.parse(deliveryTimeDTO.obtainStartTime()), LocalTime.parse(deliveryTimeDTO.obtainEndTime())),
-                DeliveryDate.valueOf(LocalDate.parse(orderDTO.obtainDeliveryDate())),
-                OrderDate.valueOf(LocalDate.parse(orderDTO.obtainOrderDate())),OrderID.valueOf(orderDTO.obtainOrderId()), convertOrderItemsListFromDTO(orderDTO.obtainOrderItems()),UserEmail.valueOf(orderDTO.obtainEmail()));
+        return new Order(OrderStatus.valueOf(orderDTO.orderStatus),
+                DeliveryTime.valueOf(LocalTime.parse(deliveryTimeDTO.startTime), LocalTime.parse(deliveryTimeDTO.endTime)),
+                DeliveryDate.valueOf(LocalDate.parse(orderDTO.deliveryDate)),
+                OrderDate.valueOf(LocalDate.parse(orderDTO.orderDate)),OrderID.valueOf(orderDTO.orderId), convertOrderItemsListFromDTO(orderDTO.orderItems),UserEmail.valueOf(orderDTO.email));
     }
 
     public static OrderItemDTO convertOrderItemToDTO(OrderItem orderItem){
@@ -47,7 +47,7 @@ public class OrderConverter {
     }
 
     public static OrderItem convertOrderItemFromDTO(OrderItemDTO orderItemDTO){
-        return OrderItem.valueOf(SandwichID.valueOf(orderItemDTO.obtainSandwichId()), Quantity.valueOf(orderItemDTO.obtainQuantity()));
+        return OrderItem.valueOf(SandwichID.valueOf(orderItemDTO.sandwichId), Quantity.valueOf(orderItemDTO.quantity));
     }
 
     public static Set<OrderItemDTO> convertOrderItemsListToDTO(Set<OrderItem> orderItems){
