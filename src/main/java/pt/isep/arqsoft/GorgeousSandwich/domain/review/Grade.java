@@ -3,6 +3,7 @@ package pt.isep.arqsoft.GorgeousSandwich.domain.review;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.EqualsBuilder;
 
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.IValueObject;
 import pt.isep.arqsoft.GorgeousSandwich.dto.review.GradeDTO;
 
@@ -10,9 +11,8 @@ public class Grade implements IValueObject<Grade>{
 	
 	private int value;
 	
-	public static int MIN_VALUE;
-	
-	public static int MAX_VALUE;
+	private static int MIN_VALUE;
+	private static int MAX_VALUE;
 	
 	protected Grade(int value) {
 		Validate.notNull(value, "Grade value must not be null.");
@@ -56,6 +56,11 @@ public class Grade implements IValueObject<Grade>{
 
 	public static GradeDTO getMinMax(){
 		return new GradeDTO(MIN_VALUE,MAX_VALUE);
+	}
+
+	public static void changeMinMax(int min, int max){
+		MIN_VALUE = min;
+		MAX_VALUE = max;
 	}
 
 }

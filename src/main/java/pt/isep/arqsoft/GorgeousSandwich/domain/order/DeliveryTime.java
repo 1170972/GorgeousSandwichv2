@@ -12,12 +12,9 @@ import pt.isep.arqsoft.GorgeousSandwich.dto.order.DeliveryTimeDTO;
 public class DeliveryTime implements IValueObject<DeliveryTime> {
 	
 	private LocalTime startTime;
-	
 	private LocalTime endTime;
 
-	public static LocalTime OpeningHours;
-	public static LocalTime ClosingHours;
-	public static int Interval;
+	private static List<DeliveryTimeDTO> possibleIntervals;
 	
 	protected DeliveryTime(LocalTime startTime, LocalTime endTime) {
 		Validate.notNull(startTime, "DeliveryTime start time must not be null.");
@@ -35,6 +32,10 @@ public class DeliveryTime implements IValueObject<DeliveryTime> {
 		return this.endTime;
 	}
 
+	public static List<DeliveryTimeDTO> obtainPossibleIntervals(){
+		return possibleIntervals;
+	}
+
 	public static DeliveryTime valueOf(LocalTime startTime, LocalTime endTime){
 		return new DeliveryTime(startTime, endTime);
 	}
@@ -42,7 +43,11 @@ public class DeliveryTime implements IValueObject<DeliveryTime> {
 	public static DeliveryTime changeDeliveryTime(LocalTime start, LocalTime end){
 		return new DeliveryTime(start,end);
 	}
-	
+
+	public static void changePossibleIntervals(List<DeliveryTimeDTO> intervals){
+		possibleIntervals = intervals;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 	    if (this == o) return true;
@@ -61,21 +66,6 @@ public class DeliveryTime implements IValueObject<DeliveryTime> {
 	@Override
 	public boolean sameValueAs(DeliveryTime other) {
 		return other != null && new EqualsBuilder().append(this.startTime, other.startTime).append(this.endTime, other.endTime).isEquals();
-	}
-
-	public static List<DeliveryTimeDTO> calculateIntervals(){
-		List<DeliveryTimeDTO> list = new ArrayList<>();
-		LocalTime hours = OpeningHours;
-		while(!hours.equals(ClosingHours)){
-			LocalTime end = hours.plusMinutes(Interval);
-			list.add(new DeliveryTimeDTO(hours.toString(),end.toString()));
-			if(end.plusMinutes(Interval).isAfter(ClosingHours)){
-				list.get(list.size()-1).endTime=ClosingHours.toString();
-				break;
-			}
-			hours=end;
-		}
-		return list;
 	}
 
 }

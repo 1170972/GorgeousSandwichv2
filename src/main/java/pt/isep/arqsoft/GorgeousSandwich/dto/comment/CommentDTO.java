@@ -2,13 +2,13 @@ package pt.isep.arqsoft.GorgeousSandwich.dto.comment;
 
 public class CommentDTO {
 	
-	public Long commentId;
+	private Long commentId;
 	
-	public String description;
+	private String description;
 	
-	public Long sandwichId;
+	private Long sandwichId;
 
-	public String email;
+	private String email;
 	
 	public CommentDTO(Long commentId, String description, Long sandwichId, String email) {
 		this.commentId = commentId;
@@ -22,7 +22,19 @@ public class CommentDTO {
 		this.sandwichId = sandwichId;
 		this.email = email;
 	}
-	
-	
+
+	public Long obtainCommentId() {
+		return this.commentId;
+	}
+
+	public String obtainDescription() {
+		return this.description;
+	}
+
+	public Long obtainSandwichId() {
+		return this.sandwichId;
+	}
+
+	public String obtainEmail() { return email; }
 
 }

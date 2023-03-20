@@ -62,14 +62,14 @@ public class OrderController {
 
     @GetMapping("/orders/times")
     public static List<DeliveryTimeDTO> getDeliveryTimes(){
-        return DeliveryTime.calculateIntervals();
+        return DeliveryTime.obtainPossibleIntervals();
     }
 
     @PostMapping("/orders")
     public OrderDTO createOrder(@RequestBody OrderDTO orderDTO){
-        checkIfSandwichExists(orderDTO.orderItems);
-        orderDTO.orderStatus="Created";
-        orderDTO.orderDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        checkIfSandwichExists(orderDTO.obtainOrderItems());
+        orderDTO.changeOrderStatus("Created");
+        orderDTO.changeOrderDate(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         Order order = orderConverter.convertFromDTO(orderDTO);
         order = orderRepository.save(order);
         return orderConverter.convertToDTO(order);
@@ -82,8 +82,9 @@ public class OrderController {
             if(LocalDate.now().until(order.obtainDeliveryDate().obtainDate(),DAYS) < 5){
                 throw new InvalidOperationException("Cant update order. Less of five days remaining to delivery");
             }
-            order.changeDeliveryTime(orderDTO.deliveryTime.startTime,orderDTO.deliveryTime.endTime);
-            order.changeOrderItems(orderConverter.convertOrderItemsListFromDTO(orderDTO.orderItems));
+            DeliveryTimeDTO deliveryTimeDTO = orderDTO.obtainDeliveryTime();
+            order.changeDeliveryTime(deliveryTimeDTO.obtainStartTime(),deliveryTimeDTO.obtainEndTime());
+            order.changeOrderItems(orderConverter.convertOrderItemsListFromDTO(orderDTO.obtainOrderItems()));
             order = this.orderRepository.update(order);
             return ResponseEntity.ok().body(this.orderConverter.convertToDTO(order));
         }catch (NoSuchElementException e){
@@ -93,8 +94,8 @@ public class OrderController {
 
     private void checkIfSandwichExists(Set<OrderItemDTO> items){
         for(OrderItemDTO item : items){
-            if(!sandwichRepository.checkIfExists(item.sandwichId)){
-                throw new IllegalArgumentException("Sandwich with id " + item.sandwichId + " not found");
+            if(!sandwichRepository.checkIfExists(item.obtainSandwichId())){
+                throw new IllegalArgumentException("Sandwich with id " + item.obtainSandwichId() + " not found");
             }
         }
     }

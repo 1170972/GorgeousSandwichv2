@@ -24,7 +24,7 @@ public class ReviewConverter {
     }
 
     public static Review convertFromDTO(ReviewDTO reviewDTO){
-        return new Review(Description.valueOf(reviewDTO.description), Grade.valueOf(reviewDTO.grade), SandwichID.valueOf(reviewDTO.sandwichId), UserEmail.valueOf(reviewDTO.email));
+        return new Review(Description.valueOf(reviewDTO.obtainDescription()), Grade.valueOf(reviewDTO.obtainGrade()), SandwichID.valueOf(reviewDTO.obtainSandwichId()), UserEmail.valueOf(reviewDTO.obtainEmail()));
     }
 
     public static List<ReviewDTO> convertReviewListToDTO(List<Review> reviewList){
