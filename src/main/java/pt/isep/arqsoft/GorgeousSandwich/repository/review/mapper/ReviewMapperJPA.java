@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReviewMapperJPA {
 
-    public Review convertToDomain(ReviewPersistenceJPA persistence) {
+    public static Review convertToDomain(ReviewPersistenceJPA persistence) {
         if(persistence.getReviewId() == null){
             return new Review(Description.valueOf(persistence.getDescription()), Grade.valueOf(persistence.getGrade()), SandwichID.valueOf(persistence.getSandwich().getSandwichId()), UserEmail.valueOf(persistence.getEmail()));
         }
         return new Review(Description.valueOf(persistence.getDescription()),Grade.valueOf(persistence.getGrade()), SandwichID.valueOf(persistence.getSandwich().getSandwichId()), ReviewID.valueOf(persistence.getReviewId()), UserEmail.valueOf(persistence.getEmail()));
     }
 
-    public ReviewPersistenceJPA convertToPersistence(Review domain) {
+    public static ReviewPersistenceJPA convertToPersistence(Review domain) {
         SandwichPersistenceJPA sandwich = new SandwichPersistenceJPA(null,0,null,null,domain.obtainSandwichId().obtainID());
         if(domain.obtainReviewId() == null){
             return new ReviewPersistenceJPA(sandwich,domain.obtainDescription().obtainName(),domain.obtainGrade().obtainValue(),domain.obtainUserEmail().obtainName());
@@ -32,7 +32,7 @@ public class ReviewMapperJPA {
         return new ReviewPersistenceJPA(domain.obtainReviewId().obtainID(),sandwich,domain.obtainDescription().obtainName(),domain.obtainGrade().obtainValue(),domain.obtainUserEmail().obtainName());
     }
 
-    public List<Review> convertListToDomain(List<ReviewPersistenceJPA> persistenceList) {
+    public static List<Review> convertListToDomain(List<ReviewPersistenceJPA> persistenceList) {
         List<Review> comments = new ArrayList<>();
         for (ReviewPersistenceJPA r:persistenceList) {
             comments.add(convertToDomain(r));
@@ -40,11 +40,4 @@ public class ReviewMapperJPA {
         return comments;
     }
 
-    public List<ReviewPersistenceJPA> convertListToPersistence(List<Review> domainList) {
-        List<ReviewPersistenceJPA> comments = new ArrayList<>();
-        for (Review r:domainList) {
-            comments.add(convertToPersistence(r));
-        }
-        return comments;
-    }
 }

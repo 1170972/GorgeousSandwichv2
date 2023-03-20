@@ -13,7 +13,7 @@ import pt.isep.arqsoft.GorgeousSandwich.domain.shared.UserEmail;
 @Service
 public class CommentConverter {
 	
-    public CommentDTO convertToDTO(Comment comment){
+    public static CommentDTO convertToDTO(Comment comment){
         if(comment.obtainCommentId() == null){
             return new CommentDTO(comment.obtainDescription().obtainName(),
                     comment.obtainSandwichId().obtainID(),comment.obtainEmail().obtainName());
@@ -22,11 +22,11 @@ public class CommentConverter {
                 comment.obtainSandwichId().obtainID(),comment.obtainEmail().obtainName());
     }
 
-    public Comment convertFromDTO(CommentDTO commentDTO){
+    public static Comment convertFromDTO(CommentDTO commentDTO){
         return new Comment(Description.valueOf(commentDTO.description), SandwichID.valueOf(commentDTO.sandwichId), UserEmail.valueOf(commentDTO.email));
     }
 
-    public List<CommentDTO> convertCommentListToDTO(List<Comment> commentList){
+    public static List<CommentDTO> convertCommentListToDTO(List<Comment> commentList){
         List<CommentDTO> commentsDTO = new ArrayList<>();
         for (Comment c : commentList){
         	commentsDTO.add(convertToDTO(c));

@@ -39,7 +39,7 @@ public class DeliveryTime implements IValueObject<DeliveryTime> {
 		return new DeliveryTime(startTime, endTime);
 	}
 
-	public DeliveryTime changeDeliveryTime(LocalTime start, LocalTime end){
+	public static DeliveryTime changeDeliveryTime(LocalTime start, LocalTime end){
 		return new DeliveryTime(start,end);
 	}
 	

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SandwichConverter {
 
-    public SandwichDTO convertToDTO(Sandwich sandwich){
+    public static SandwichDTO convertToDTO(Sandwich sandwich){
         if (sandwich.obtainSandwichID() == null){
             return new SandwichDTO(sandwich.obtainStock().obtainUnits(), sandwich.obtainType().toString(),
                     sandwich.obtainDesignation().obtainName(), sandwich.obtainDescription().obtainName());
@@ -24,7 +24,7 @@ public class SandwichConverter {
 
     }
 
-    public Sandwich convertFromDTO(SandwichDTO sandwichDTO){
+    public static Sandwich convertFromDTO(SandwichDTO sandwichDTO){
         String type = sandwichDTO.type.toUpperCase();
         if(Type.lookupByName(type)== null){
             return null;
@@ -37,7 +37,7 @@ public class SandwichConverter {
                 Designation.valueOf(sandwichDTO.designation), Description.valueOf(sandwichDTO.description), SandwichID.valueOf(sandwichDTO.sandwichId));
     }
 
-    public List<SandwichDTO> convertListToDTO(List<Sandwich> sandwichList){
+    public static List<SandwichDTO> convertListToDTO(List<Sandwich> sandwichList){
         List<SandwichDTO> sandwichDTOList = new ArrayList<>();
         for (Sandwich s : sandwichList){
             sandwichDTOList.add(convertToDTO(s));
