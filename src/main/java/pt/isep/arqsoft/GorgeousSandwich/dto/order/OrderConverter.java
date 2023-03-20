@@ -1,11 +1,11 @@
 package pt.isep.arqsoft.GorgeousSandwich.dto.order;
 
+import java.util.TreeSet;
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.*;
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.SandwichID;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.stereotype.Service;
@@ -49,7 +49,7 @@ public class OrderConverter {
     }
 
     public Set<OrderItemDTO> convertOrderItemsListToDTO(Set<OrderItem> orderItems){
-        Set<OrderItemDTO> orderItemsDTO = new HashSet<>();
+        Set<OrderItemDTO> orderItemsDTO = new TreeSet<>();
         for (OrderItem o : orderItems){
             orderItemsDTO.add(convertOrderItemToDTO(o));
         }
@@ -57,7 +57,7 @@ public class OrderConverter {
     }
 
     public Set<OrderItem> convertOrderItemsListFromDTO(Set<OrderItemDTO> orderItemsDTO){
-        Set<OrderItem> orderItems = new HashSet<>();
+        Set<OrderItem> orderItems = new TreeSet<>();
         for (OrderItemDTO o : orderItemsDTO){
             orderItems.add(convertOrderItemFromDTO(o));
         }
