@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.DeliveryTime;
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.Order;
 import pt.isep.arqsoft.GorgeousSandwich.dto.order.DeliveryTimeDTO;
-import pt.isep.arqsoft.GorgeousSandwich.persistence.order.OrderPersistenceJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.order.IOrderRepositoryJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.order.mapper.OrderMapperJPA;
 
@@ -26,19 +25,16 @@ public class OrderRepositoryWrapperJPA {
 
 	public Order save(Order model) {
 		this.validateModel(model);
-		OrderPersistenceJPA orderJPA = this.mapper.convertToPersistence(model);
-		return this.mapper.convertToDomain(this.repository.save(orderJPA));
+		return this.mapper.convertToDomain(this.repository.save(this.mapper.convertToPersistence(model)));
 	}
 
 	public List<Order> findAll() {
-		List<OrderPersistenceJPA> ordersJPA = this.repository.findAll();
-		return this.mapper.convertListToDomain(ordersJPA);
+		return this.mapper.convertListToDomain(this.repository.findAll());
 	}
 
 	public Order update(Order model) {
 		this.validateModel(model);
-		OrderPersistenceJPA order = this.mapper.convertToPersistence(model);
-		return this.mapper.convertToDomain(this.repository.save(order));
+		return this.mapper.convertToDomain(this.repository.save(this.mapper.convertToPersistence(model)));
 	}
 
 	public Order getById(Long Id) {
@@ -50,9 +46,9 @@ public class OrderRepositoryWrapperJPA {
 	}
 
 	private static void validateModel(Order model) {
-		List<DeliveryTimeDTO> list = DeliveryTime.obtainPossibleIntervals();
-		DeliveryTimeDTO time = new DeliveryTimeDTO(model.obtainDeliveryTime().obtainStartTime().toString(),model.obtainDeliveryTime().obtainEndTime().toString());
-		Validate.isTrue(list.contains(time),"Invalid delivery time interval");
+		DeliveryTime deliveryTime = model.obtainDeliveryTime();
+		DeliveryTimeDTO time = new DeliveryTimeDTO(deliveryTime.obtainStartTime().toString(),deliveryTime.obtainEndTime().toString());
+		Validate.isTrue(DeliveryTime.obtainPossibleIntervals().contains(time),"Invalid delivery time interval");
 	}
 
 }

@@ -3,7 +3,6 @@ package pt.isep.arqsoft.GorgeousSandwich.repository.comment.wrapper;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import pt.isep.arqsoft.GorgeousSandwich.domain.comment.Comment;
-import pt.isep.arqsoft.GorgeousSandwich.persistence.comment.CommentPersistenceJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.comment.ICommentRepositoryJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.comment.mapper.CommentMapperJPA;
 
@@ -19,8 +18,7 @@ public class CommentRepositoryWrapperJPA {
 	}
 
 	public Comment save(Comment model) {
-		CommentPersistenceJPA comment = mapper.convertToPersistence(model);
-		return this.mapper.convertToDomain(this.repository.save(comment));
+		return this.mapper.convertToDomain(this.repository.save(mapper.convertToPersistence(model)));
 	}
 
 	public List<Comment> findBySandwichId(Long sandwichId) {

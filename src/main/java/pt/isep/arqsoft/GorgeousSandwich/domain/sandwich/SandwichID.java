@@ -26,9 +26,7 @@ public class SandwichID implements IValueObject<SandwichID> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    SandwichID other = (SandwichID) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((SandwichID) o);
 	}
 	
 	@Override

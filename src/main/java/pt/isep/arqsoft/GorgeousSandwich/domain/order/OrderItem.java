@@ -35,9 +35,7 @@ public class OrderItem implements IValueObject<OrderItem>, Comparable<OrderItem>
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    OrderItem other = (OrderItem) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((OrderItem) o);
 	}
 	
 	@Override

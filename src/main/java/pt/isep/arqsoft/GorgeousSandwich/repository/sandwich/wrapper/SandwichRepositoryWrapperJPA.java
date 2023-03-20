@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.Sandwich;
-import pt.isep.arqsoft.GorgeousSandwich.persistence.sandwich.SandwichPersistenceJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.sandwich.ISandwichRepositoryJPA;
 import pt.isep.arqsoft.GorgeousSandwich.repository.sandwich.mapper.SandwichMapperJPA;
 
@@ -21,13 +20,11 @@ public class SandwichRepositoryWrapperJPA {
 	}
 
 	public Sandwich save(Sandwich model) {
-		SandwichPersistenceJPA sandwichJPA = this.mapper.convertToPersistence(model);
-		return this.mapper.convertToDomain(this.repository.save(sandwichJPA));
+		return this.mapper.convertToDomain(this.repository.save(this.mapper.convertToPersistence(model)));
 	}
 
 	public List<Sandwich> findAll() {
-		List<SandwichPersistenceJPA> sandwichesJPA = this.repository.findAll();
-		return this.mapper.convertListToDomain(sandwichesJPA);
+		return this.mapper.convertListToDomain(this.repository.findAll());
 	}
 
 	public boolean checkIfExists(Long Id) {
@@ -39,8 +36,7 @@ public class SandwichRepositoryWrapperJPA {
 	}
 
 	public Sandwich update(Sandwich model) {
-		SandwichPersistenceJPA sandwichJPA = this.mapper.convertToPersistence(model);
-		return this.mapper.convertToDomain(this.repository.save(sandwichJPA));
+		return this.mapper.convertToDomain(this.repository.save(this.mapper.convertToPersistence(model)));
 	}
 
 }

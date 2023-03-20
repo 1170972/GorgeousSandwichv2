@@ -27,9 +27,7 @@ public class CommentID implements IValueObject<CommentID> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    CommentID other = (CommentID) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((CommentID) o);
 	}
 	
 	@Override

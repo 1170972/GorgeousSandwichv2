@@ -27,9 +27,7 @@ public class OrderDate implements IValueObject<OrderDate> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    OrderDate other = (OrderDate) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((OrderDate) o);
 	}
 	
 	@Override

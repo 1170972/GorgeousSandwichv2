@@ -78,9 +78,7 @@ public class Order implements IEntity<Order> {
 	}
 
 	public void changeDeliveryTime(String startTime,String endTime){
-		LocalTime sTime = LocalTime.parse(startTime);
-		LocalTime eTime = LocalTime.parse(endTime);
-		this.deliveryTime = deliveryTime.changeDeliveryTime(sTime,eTime);
+		this.deliveryTime = deliveryTime.changeDeliveryTime(LocalTime.parse(startTime),LocalTime.parse(endTime));
 	}
 
 	public void changeOrderItems(Set<OrderItem>orderItems){
@@ -92,9 +90,7 @@ public class Order implements IEntity<Order> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Order other = (Order) o;
-
-	    return sameIdentityAs(other);
+	    return sameIdentityAs((Order) o);
 	}
 	
 	@Override

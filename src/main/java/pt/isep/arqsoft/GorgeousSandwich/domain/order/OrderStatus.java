@@ -28,9 +28,7 @@ public class OrderStatus implements IValueObject<OrderStatus> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    OrderStatus other = (OrderStatus) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((OrderStatus) o);
 	}
 	
 	@Override

@@ -3,7 +3,6 @@ package pt.isep.arqsoft.GorgeousSandwich.repository.order.mapper;
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.*;
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.SandwichID;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.UserEmail;
-import pt.isep.arqsoft.GorgeousSandwich.dto.order.DeliveryTimeDTO;
 import pt.isep.arqsoft.GorgeousSandwich.persistence.order.OrderPersistenceJPA;
 import java.util.*;
 

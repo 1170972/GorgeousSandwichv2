@@ -28,9 +28,7 @@ public class Quantity implements IValueObject<Quantity> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Quantity other = (Quantity) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((Quantity) o);
 	}
 	
 	@Override

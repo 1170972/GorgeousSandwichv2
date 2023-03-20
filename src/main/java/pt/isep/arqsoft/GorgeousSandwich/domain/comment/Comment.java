@@ -1,7 +1,5 @@
 package pt.isep.arqsoft.GorgeousSandwich.domain.comment;
 
-import org.apache.commons.lang.Validate;
-
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.SandwichID;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.Description;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.IEntity;
@@ -49,9 +47,7 @@ public class Comment implements IEntity<Comment> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Comment other = (Comment) o;
-
-	    return sameIdentityAs(other);
+	    return sameIdentityAs((Comment) o);
 	}
 	
 	@Override

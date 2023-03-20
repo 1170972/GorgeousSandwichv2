@@ -1,7 +1,5 @@
 package pt.isep.arqsoft.GorgeousSandwich.domain.review;
 
-import org.apache.commons.lang.Validate;
-
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.SandwichID;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.Description;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.IEntity;
@@ -58,9 +56,7 @@ public class Review implements IEntity<Review> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Review other = (Review) o;
-
-	    return sameIdentityAs(other);
+	    return sameIdentityAs((Review) o);
 	}
 	
 	@Override

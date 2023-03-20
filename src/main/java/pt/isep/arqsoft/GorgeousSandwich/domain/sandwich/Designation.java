@@ -28,9 +28,7 @@ public class Designation implements IValueObject<Designation> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    Designation other = (Designation) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((Designation) o);
 	}
 	
 	@Override

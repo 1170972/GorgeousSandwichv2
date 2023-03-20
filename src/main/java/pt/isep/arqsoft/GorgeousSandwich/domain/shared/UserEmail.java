@@ -25,9 +25,7 @@ public class UserEmail implements IValueObject<UserEmail> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserEmail other = (UserEmail) o;
-
-        return sameValueAs(other);
+        return sameValueAs((UserEmail) o);
     }
 
     @Override

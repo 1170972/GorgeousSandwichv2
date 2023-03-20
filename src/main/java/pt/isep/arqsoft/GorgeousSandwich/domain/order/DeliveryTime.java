@@ -1,7 +1,6 @@
 package pt.isep.arqsoft.GorgeousSandwich.domain.order;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.Validate;
@@ -53,9 +52,7 @@ public class DeliveryTime implements IValueObject<DeliveryTime> {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 
-	    DeliveryTime other = (DeliveryTime) o;
-
-	    return sameValueAs(other);
+	    return sameValueAs((DeliveryTime) o);
 	}
 	
 	@Override
