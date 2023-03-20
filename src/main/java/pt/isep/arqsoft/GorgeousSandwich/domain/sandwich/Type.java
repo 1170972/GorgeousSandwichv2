@@ -1,8 +1,7 @@
 package pt.isep.arqsoft.GorgeousSandwich.domain.sandwich;
 
+import java.util.Hashtable;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.IValueObject;
-
-import java.util.HashMap;
 import java.util.Map;
 
 public enum Type implements IValueObject<Type> {
@@ -20,7 +19,7 @@ public enum Type implements IValueObject<Type> {
 		return this.equals(other);
 	}
 
-	public static final Map<String, Type> nameIndex = new HashMap<String, Type>();
+	public static final Map<String, Type> nameIndex = new Hashtable<String, Type>();
 	static{
 		for(Type type : Type.values()){
 			nameIndex.put(type.name(), type);

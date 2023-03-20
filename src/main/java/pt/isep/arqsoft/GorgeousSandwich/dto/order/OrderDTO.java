@@ -2,7 +2,7 @@ package pt.isep.arqsoft.GorgeousSandwich.dto.order;
 
 import java.util.Set;
 
-public class OrderDTO {
+public class OrderDTO implements Comparable<OrderDTO>{
 
     public Long orderId;
     
@@ -17,6 +17,10 @@ public class OrderDTO {
     public Set<OrderItemDTO> orderItems;
 
     public String email;
+
+    public OrderDTO(){
+
+    }
 
     public OrderDTO(String orderStatus, DeliveryTimeDTO deliveryTime,
                     String deliveryDate, String orderDate, Set<OrderItemDTO> orderItems,String email) {
@@ -37,5 +41,18 @@ public class OrderDTO {
         this.orderDate = orderDate;
         this.orderItems = orderItems;
         this.email = email;
+    }
+
+    @Override
+    public int compareTo(OrderDTO o) {
+        if (orderId > o.orderId) {
+            return 1;
+        }
+        else if (orderId < o.orderId) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
     }
 }

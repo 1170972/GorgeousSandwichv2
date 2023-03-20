@@ -6,7 +6,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.SandwichID;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.IValueObject;
 
-public class OrderItem implements IValueObject<OrderItem> {
+public class OrderItem implements IValueObject<OrderItem>, Comparable<OrderItem> {
 	
 	private SandwichID sandwichId;
 	
@@ -50,4 +50,16 @@ public class OrderItem implements IValueObject<OrderItem> {
 		return other != null && new EqualsBuilder().append(this.sandwichId, other.sandwichId).append(this.quantity, other.quantity).isEquals();
 	}
 
+	@Override
+	public int compareTo(OrderItem o) {
+		if (sandwichId.obtainID() > o.sandwichId.obtainID()) {
+			return 1;
+		}
+		else if (sandwichId.obtainID() < o.sandwichId.obtainID()) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
+	}
 }

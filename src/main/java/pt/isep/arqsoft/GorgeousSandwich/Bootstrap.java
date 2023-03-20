@@ -1,8 +1,8 @@
 package pt.isep.arqsoft.GorgeousSandwich;
 
 import java.text.SimpleDateFormat;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import pt.isep.arqsoft.GorgeousSandwich.controller.CommentController;
@@ -108,8 +108,10 @@ public class Bootstrap implements CommandLineRunner {
         System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " Starting the Make an Order");
         DeliveryTimeDTO deliveryTime = new DeliveryTimeDTO("13:40", "14:00");
         OrderItemDTO orderItem = new OrderItemDTO(sandwich1.sandwichId, 2);
-        Set<OrderItemDTO> orderItemList = new HashSet<OrderItemDTO>();
+        OrderItemDTO orderItem1 = new OrderItemDTO(sandwich2.sandwichId, 1);
+        Set<OrderItemDTO> orderItemList = new TreeSet<>();
         orderItemList.add(orderItem);
+        orderItemList.add(orderItem1);
         OrderDTO order1 = orderController.createOrder(new OrderDTO(null, deliveryTime, "2023-03-30", null, orderItemList, "test@test.com"));
         orderController.createOrder(new OrderDTO(null, deliveryTime, "2023-03-30", null, orderItemList, "test@test.com"));
         orderController.createOrder(new OrderDTO(null, deliveryTime, "2023-03-30", null, orderItemList, "test@test.com"));
@@ -119,9 +121,9 @@ public class Bootstrap implements CommandLineRunner {
 
         System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " Starting the Update of Orders");
         DeliveryTimeDTO deliveryTime1 = new DeliveryTimeDTO("14:00", "14:20");
-        OrderItemDTO orderItem1 = new OrderItemDTO(sandwich2.sandwichId, 1);
-        Set<OrderItemDTO> orderItemList1 = new HashSet<OrderItemDTO>();
-        orderItemList1.add(orderItem1);
+        OrderItemDTO orderItem2 = new OrderItemDTO(sandwich2.sandwichId, 1);
+        Set<OrderItemDTO> orderItemList1 = new TreeSet<>();
+        orderItemList1.add(orderItem2);
         orderController.updateOrder(order1.orderId, new OrderDTO(null, deliveryTime1, "2023-03-30", null, orderItemList1, "test@test.com"));
         orderController.updateOrder(order1.orderId, new OrderDTO(null, deliveryTime, "2023-03-30", null, orderItemList, "test@test.com"));
         orderController.updateOrder(order1.orderId, new OrderDTO(null, deliveryTime, "2023-03-30", null, orderItemList, "test@test.com"));

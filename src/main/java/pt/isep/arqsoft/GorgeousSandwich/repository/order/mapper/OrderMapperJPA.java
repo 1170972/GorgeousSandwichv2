@@ -4,7 +4,6 @@ import pt.isep.arqsoft.GorgeousSandwich.domain.order.*;
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.SandwichID;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.UserEmail;
 import pt.isep.arqsoft.GorgeousSandwich.persistence.order.OrderPersistenceJPA;
-
 import java.util.*;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class OrderMapperJPA {
 
 	public Order convertToDomain(OrderPersistenceJPA persistence) {
-		Set<OrderItem> set = new HashSet<>();
+		Set<OrderItem> set = new TreeSet<>();
 		for (Long l : persistence.getOrderItems().keySet()) {
 			OrderItem orderItem = OrderItem.valueOf(SandwichID.valueOf(l), Quantity.valueOf(persistence.getOrderItems().get(l)));
 			set.add(orderItem);
@@ -25,7 +24,7 @@ public class OrderMapperJPA {
 	}
 
 	public OrderPersistenceJPA convertToPersistence(Order domain) {
-		Map<Long, Integer> map = new HashMap<>();
+		Map<Long, Integer> map = new Hashtable<>();
 		for(OrderItem orderItem : domain.obtainOrderItems()){
 			map.put(orderItem.obtainSandwichId().obtainID(), orderItem.obtainQuantity().obtainUnits());
 		}
