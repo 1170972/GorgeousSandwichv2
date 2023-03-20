@@ -3,11 +3,23 @@ package pt.isep.arqsoft.GorgeousSandwich.dto.order;
 import java.util.Objects;
 
 public class DeliveryTimeDTO {
-    public String startTime;
-    public String endTime;
+    private String startTime;
+    private String endTime;
 
     public DeliveryTimeDTO(String startTime, String endTime) {
         this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public String obtainStartTime() {
+        return this.startTime;
+    }
+
+    public String obtainEndTime() {
+        return this.endTime;
+    }
+
+    public void changeEndTime(String endTime){
         this.endTime = endTime;
     }
 

@@ -3,6 +3,7 @@ package pt.isep.arqsoft.GorgeousSandwich.repository.order.mapper;
 import pt.isep.arqsoft.GorgeousSandwich.domain.order.*;
 import pt.isep.arqsoft.GorgeousSandwich.domain.sandwich.SandwichID;
 import pt.isep.arqsoft.GorgeousSandwich.domain.shared.UserEmail;
+import pt.isep.arqsoft.GorgeousSandwich.dto.order.DeliveryTimeDTO;
 import pt.isep.arqsoft.GorgeousSandwich.persistence.order.OrderPersistenceJPA;
 import java.util.*;
 
@@ -28,10 +29,11 @@ public class OrderMapperJPA {
 		for(OrderItem orderItem : domain.obtainOrderItems()){
 			map.put(orderItem.obtainSandwichId().obtainID(), orderItem.obtainQuantity().obtainUnits());
 		}
+		DeliveryTime deliveryTime = domain.obtainDeliveryTime();
 		if(domain.obtainOrderId() == null){
-			return new OrderPersistenceJPA(domain.obtainOrderStatus().obtainName(), domain.obtainDeliveryTime().obtainStartTime(), domain.obtainDeliveryTime().obtainEndTime(), domain.obtainDeliveryDate().obtainDate(), domain.obtainOrderDate().obtainDate(), map,domain.obtainUserEmail().obtainName());
+			return new OrderPersistenceJPA(domain.obtainOrderStatus().obtainName(), deliveryTime.obtainStartTime(), deliveryTime.obtainEndTime(), domain.obtainDeliveryDate().obtainDate(), domain.obtainOrderDate().obtainDate(), map,domain.obtainUserEmail().obtainName());
 		}
-		return new OrderPersistenceJPA(domain.obtainOrderStatus().obtainName(), domain.obtainDeliveryTime().obtainStartTime(), domain.obtainDeliveryTime().obtainEndTime(), domain.obtainDeliveryDate().obtainDate(), domain.obtainOrderDate().obtainDate(), domain.obtainOrderId().obtainID(), map,domain.obtainUserEmail().obtainName());
+		return new OrderPersistenceJPA(domain.obtainOrderStatus().obtainName(), deliveryTime.obtainStartTime(), deliveryTime.obtainEndTime(), domain.obtainDeliveryDate().obtainDate(), domain.obtainOrderDate().obtainDate(), domain.obtainOrderId().obtainID(), map,domain.obtainUserEmail().obtainName());
 	}
 
 	public static List<Order> convertListToDomain(List<OrderPersistenceJPA> persistenceList) {

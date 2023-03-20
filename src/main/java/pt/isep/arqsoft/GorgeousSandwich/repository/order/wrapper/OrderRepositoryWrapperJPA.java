@@ -50,7 +50,7 @@ public class OrderRepositoryWrapperJPA {
 	}
 
 	private static void validateModel(Order model) {
-		List<DeliveryTimeDTO> list = DeliveryTime.calculateIntervals();
+		List<DeliveryTimeDTO> list = DeliveryTime.obtainPossibleIntervals();
 		DeliveryTimeDTO time = new DeliveryTimeDTO(model.obtainDeliveryTime().obtainStartTime().toString(),model.obtainDeliveryTime().obtainEndTime().toString());
 		Validate.isTrue(list.contains(time),"Invalid delivery time interval");
 	}

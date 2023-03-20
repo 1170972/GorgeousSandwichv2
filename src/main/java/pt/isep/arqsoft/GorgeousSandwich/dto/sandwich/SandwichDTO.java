@@ -2,15 +2,15 @@ package pt.isep.arqsoft.GorgeousSandwich.dto.sandwich;
 
 public class SandwichDTO {
 
-    public Integer stock;
-    
-    public String type;
-    
-    public String designation;
-    
-    public String description;
-    
-    public Long sandwichId;
+    private Integer stock;
+
+    private String type;
+
+    private String designation;
+
+    private String description;
+
+    private Long sandwichId;
 
     public SandwichDTO(){
 
@@ -31,4 +31,23 @@ public class SandwichDTO {
         this.description = description;
     }
 
+    public Integer obtainStock() {
+        return stock;
+    }
+
+    public String obtainType() {
+        return type;
+    }
+
+    public String obtainDesignation() {
+        return designation;
+    }
+
+    public String obtainDescription() {
+        return description;
+    }
+
+    public Long obtainSandwichId() {
+        return sandwichId;
+    }
 }
