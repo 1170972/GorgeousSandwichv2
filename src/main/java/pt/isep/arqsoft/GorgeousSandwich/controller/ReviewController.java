@@ -35,7 +35,7 @@ public class ReviewController {
     }
 
     @GetMapping("reviews/gradeValues")
-    public GradeDTO getGradeMinAndMax(){
+    public static GradeDTO getGradeMinAndMax(){
         return Grade.getMinMax();
     }
 

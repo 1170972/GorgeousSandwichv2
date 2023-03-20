@@ -49,7 +49,7 @@ public class OrderRepositoryWrapperJPA {
 		return this.mapper.convertListToDomain(this.repository.findByEmail(email));
 	}
 
-	private void validateModel(Order model) {
+	private static void validateModel(Order model) {
 		List<DeliveryTimeDTO> list = DeliveryTime.calculateIntervals();
 		DeliveryTimeDTO time = new DeliveryTimeDTO(model.obtainDeliveryTime().obtainStartTime().toString(),model.obtainDeliveryTime().obtainEndTime().toString());
 		Validate.isTrue(list.contains(time),"Invalid delivery time interval");

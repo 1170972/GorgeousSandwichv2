@@ -14,7 +14,7 @@ import pt.isep.arqsoft.GorgeousSandwich.domain.shared.UserEmail;
 @Service
 public class ReviewConverter {
 	
-    public ReviewDTO convertToDTO(Review review){
+    public static ReviewDTO convertToDTO(Review review){
         if(review.obtainReviewId() == null){
             return new ReviewDTO(review.obtainDescription().obtainName(), review.obtainGrade().obtainValue(),
             		review.obtainSandwichId().obtainID(),review.obtainUserEmail().obtainName());
@@ -23,11 +23,11 @@ public class ReviewConverter {
         		review.obtainSandwichId().obtainID(),review.obtainUserEmail().obtainName());
     }
 
-    public Review convertFromDTO(ReviewDTO reviewDTO){
+    public static Review convertFromDTO(ReviewDTO reviewDTO){
         return new Review(Description.valueOf(reviewDTO.description), Grade.valueOf(reviewDTO.grade), SandwichID.valueOf(reviewDTO.sandwichId), UserEmail.valueOf(reviewDTO.email));
     }
 
-    public List<ReviewDTO> convertReviewListToDTO(List<Review> reviewList){
+    public static List<ReviewDTO> convertReviewListToDTO(List<Review> reviewList){
         List<ReviewDTO> reviewsDTO = new ArrayList<>();
         for (Review r : reviewList){
         	reviewsDTO.add(convertToDTO(r));

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderMapperJPA {
 
-	public Order convertToDomain(OrderPersistenceJPA persistence) {
+	public static Order convertToDomain(OrderPersistenceJPA persistence) {
 		Set<OrderItem> set = new TreeSet<>();
 		for (Long l : persistence.getOrderItems().keySet()) {
 			OrderItem orderItem = OrderItem.valueOf(SandwichID.valueOf(l), Quantity.valueOf(persistence.getOrderItems().get(l)));
@@ -23,7 +23,7 @@ public class OrderMapperJPA {
 		return new Order(OrderStatus.valueOf(persistence.getOrderStatus()), DeliveryTime.valueOf(persistence.getStartTime(), persistence.getEndTime()), DeliveryDate.valueOf(persistence.getDeliveryDate()), OrderDate.valueOf(persistence.getOrderDate()), OrderID.valueOf(persistence.getOrderId()), set, UserEmail.valueOf(persistence.getEmail()));
 	}
 
-	public OrderPersistenceJPA convertToPersistence(Order domain) {
+	public static OrderPersistenceJPA convertToPersistence(Order domain) {
 		Map<Long, Integer> map = new Hashtable<>();
 		for(OrderItem orderItem : domain.obtainOrderItems()){
 			map.put(orderItem.obtainSandwichId().obtainID(), orderItem.obtainQuantity().obtainUnits());
@@ -34,7 +34,7 @@ public class OrderMapperJPA {
 		return new OrderPersistenceJPA(domain.obtainOrderStatus().obtainName(), domain.obtainDeliveryTime().obtainStartTime(), domain.obtainDeliveryTime().obtainEndTime(), domain.obtainDeliveryDate().obtainDate(), domain.obtainOrderDate().obtainDate(), domain.obtainOrderId().obtainID(), map,domain.obtainUserEmail().obtainName());
 	}
 
-	public List<Order> convertListToDomain(List<OrderPersistenceJPA> persistenceList) {
+	public static List<Order> convertListToDomain(List<OrderPersistenceJPA> persistenceList) {
 		List<Order> orders = new ArrayList<>();
 		for (OrderPersistenceJPA o : persistenceList) {
 			orders.add(convertToDomain(o));

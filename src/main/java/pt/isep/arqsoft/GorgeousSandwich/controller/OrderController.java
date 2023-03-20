@@ -61,7 +61,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/times")
-    public List<DeliveryTimeDTO> getDeliveryTimes(){
+    public static List<DeliveryTimeDTO> getDeliveryTimes(){
         return DeliveryTime.calculateIntervals();
     }
 

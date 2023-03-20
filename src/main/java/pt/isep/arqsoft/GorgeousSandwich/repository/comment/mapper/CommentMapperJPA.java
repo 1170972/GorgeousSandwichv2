@@ -16,14 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentMapperJPA {
 
-    public Comment convertToDomain(CommentPersistenceJPA persistence) {
+    public static Comment convertToDomain(CommentPersistenceJPA persistence) {
         if(persistence.getCommentId() == null){
             return new Comment(Description.valueOf(persistence.getDescription()), SandwichID.valueOf(persistence.getSandwich().getSandwichId()), UserEmail.valueOf(persistence.getEmail()));
         }
         return new Comment(Description.valueOf(persistence.getDescription()), SandwichID.valueOf(persistence.getSandwich().getSandwichId()), UserEmail.valueOf(persistence.getEmail()), CommentID.valueOf(persistence.getCommentId()));
     }
 
-    public CommentPersistenceJPA convertToPersistence(Comment domain) {
+    public static CommentPersistenceJPA convertToPersistence(Comment domain) {
         SandwichPersistenceJPA sandwich = new SandwichPersistenceJPA(null,0,null,null,domain.obtainSandwichId().obtainID());
         if(domain.obtainCommentId() == null){
             return new CommentPersistenceJPA(sandwich,domain.obtainDescription().obtainName(),domain.obtainEmail().obtainName());
@@ -31,7 +31,7 @@ public class CommentMapperJPA {
         return new CommentPersistenceJPA(domain.obtainCommentId().obtainID(),sandwich,domain.obtainDescription().obtainName(),domain.obtainEmail().obtainName());
     }
 
-    public List<Comment> convertListToDomain(List<CommentPersistenceJPA> persistenceList) {
+    public static List<Comment> convertListToDomain(List<CommentPersistenceJPA> persistenceList) {
         List<Comment> comments = new ArrayList<>();
         for (CommentPersistenceJPA c:persistenceList) {
             comments.add(convertToDomain(c));
@@ -39,7 +39,7 @@ public class CommentMapperJPA {
         return comments;
     }
 
-    public List<CommentPersistenceJPA> convertListToPersistence(List<Comment> domainList) {
+    public static List<CommentPersistenceJPA> convertListToPersistence(List<Comment> domainList) {
         List<CommentPersistenceJPA> comments = new ArrayList<>();
         for (Comment c:domainList) {
             comments.add(convertToPersistence(c));
