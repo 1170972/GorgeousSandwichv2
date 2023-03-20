@@ -4,19 +4,19 @@ import java.util.Set;
 
 public class OrderDTO implements Comparable<OrderDTO>{
 
-    private Long orderId;
-    
-    private String orderStatus;
-    
-    private DeliveryTimeDTO deliveryTime;
-    
-    private String deliveryDate;
-    
-    private String orderDate;
-    
-    private Set<OrderItemDTO> orderItems;
+    public Long orderId;
 
-    private String email;
+    public String orderStatus;
+
+    public DeliveryTimeDTO deliveryTime;
+
+    public String deliveryDate;
+
+    public String orderDate;
+
+    public Set<OrderItemDTO> orderItems;
+
+    public String email;
 
     public OrderDTO(){
 
@@ -41,42 +41,6 @@ public class OrderDTO implements Comparable<OrderDTO>{
         this.orderDate = orderDate;
         this.orderItems = orderItems;
         this.email = email;
-    }
-
-    public Long obtainOrderId() {
-        return orderId;
-    }
-
-    public String obtainOrderStatus() {
-        return orderStatus;
-    }
-
-    public DeliveryTimeDTO obtainDeliveryTime() {
-        return deliveryTime;
-    }
-
-    public String obtainDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public String obtainOrderDate() {
-        return orderDate;
-    }
-
-    public Set<OrderItemDTO> obtainOrderItems() {
-        return orderItems;
-    }
-
-    public String obtainEmail(){
-        return email;
-    }
-
-    public void changeOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public void changeOrderDate(String orderDate) {
-        this.orderDate = orderDate;
     }
 
     @Override

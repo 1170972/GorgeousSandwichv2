@@ -2,24 +2,28 @@ package pt.isep.arqsoft.GorgeousSandwich.dto.review;
 
 public class ReviewDTO {
 
-	private Long reviewId;
-	
-	private String description;
+	public Long reviewId;
 
-	private Integer grade;
+	public String description;
 
-	private Long sandwichId;
+	public Integer grade;
 
-	private String email;
-	
-	public ReviewDTO(Long reviewId, String description, Integer grade, Long sandwichId,String email) {
+	public Long sandwichId;
+
+	public String email;
+
+	public ReviewDTO(){
+
+	}
+
+	public ReviewDTO(Long reviewId, String description, Integer grade, Long sandwichId, String email) {
 		this.reviewId = reviewId;
 		this.description = description;
 		this.grade = grade;
 		this.sandwichId = sandwichId;
 		this.email = email;
 	}
-	
+
 	public ReviewDTO(String description, Integer grade, Long sandwichId, String email) {
 		this.description = description;
 		this.grade = grade;
@@ -27,19 +31,4 @@ public class ReviewDTO {
 		this.email = email;
 	}
 
-	public String obtainDescription() {
-		return description;
-	}
-
-	public Integer obtainGrade() {
-		return grade;
-	}
-
-	public Long obtainSandwichId() {
-		return sandwichId;
-	}
-
-	public String obtainEmail() {
-		return email;
-	}
 }

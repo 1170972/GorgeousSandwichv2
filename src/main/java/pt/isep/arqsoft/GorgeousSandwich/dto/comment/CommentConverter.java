@@ -23,7 +23,7 @@ public class CommentConverter {
     }
 
     public static Comment convertFromDTO(CommentDTO commentDTO){
-        return new Comment(Description.valueOf(commentDTO.obtainDescription()), SandwichID.valueOf(commentDTO.obtainSandwichId()), UserEmail.valueOf(commentDTO.obtainEmail()));
+        return new Comment(Description.valueOf(commentDTO.description), SandwichID.valueOf(commentDTO.sandwichId), UserEmail.valueOf(commentDTO.email));
     }
 
     public static List<CommentDTO> convertCommentListToDTO(List<Comment> commentList){
