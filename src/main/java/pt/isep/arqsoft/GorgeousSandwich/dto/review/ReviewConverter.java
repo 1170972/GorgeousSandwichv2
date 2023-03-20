@@ -1,9 +1,7 @@
 package pt.isep.arqsoft.GorgeousSandwich.dto.review;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 

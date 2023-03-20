@@ -1,6 +1,5 @@
 package pt.isep.arqsoft.GorgeousSandwich.domain.order;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -80,20 +79,10 @@ public class Order implements IEntity<Order> {
 		return this.orderId;
 	}
 
-	public void changeOrderStatus(String name){
-		this.orderStatus = orderStatus.changeStatus(name);
-	}
-
 	public void changeDeliveryTime(String startTime,String endTime){
 		LocalTime sTime = LocalTime.parse(startTime);
 		LocalTime eTime = LocalTime.parse(endTime);
 		this.deliveryTime = deliveryTime.changeDeliveryTime(sTime,eTime);
-	}
-
-	public void changeDeliveryDate(String date){
-		LocalDate d = LocalDate.parse(date);
-		Validate.isTrue(d.isAfter(orderDate.obtainDate().plusDays(2)) && d.isBefore(orderDate.obtainDate().plusDays(29)),"Delivery date must be up to 3 days after or 28 days after the order date");
-		this.deliveryDate = deliveryDate.changeDate(d);
 	}
 
 	public void changeOrderItems(Set<OrderItem>orderItems){

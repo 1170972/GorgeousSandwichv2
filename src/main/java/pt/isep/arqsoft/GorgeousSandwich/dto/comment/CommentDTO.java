@@ -10,10 +10,6 @@ public class CommentDTO {
 
 	public String email;
 	
-	public CommentDTO() {
-
-	}
-	
 	public CommentDTO(Long commentId, String description, Long sandwichId, String email) {
 		this.commentId = commentId;
 		this.description = description;

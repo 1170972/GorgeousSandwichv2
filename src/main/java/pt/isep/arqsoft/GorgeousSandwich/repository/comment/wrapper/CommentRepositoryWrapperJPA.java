@@ -1,8 +1,6 @@
 package pt.isep.arqsoft.GorgeousSandwich.repository.comment.wrapper;
 
 import java.util.List;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import pt.isep.arqsoft.GorgeousSandwich.domain.comment.Comment;
 import pt.isep.arqsoft.GorgeousSandwich.persistence.comment.CommentPersistenceJPA;

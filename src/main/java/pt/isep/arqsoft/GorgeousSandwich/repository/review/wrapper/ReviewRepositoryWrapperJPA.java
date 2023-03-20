@@ -1,8 +1,6 @@
 package pt.isep.arqsoft.GorgeousSandwich.repository.review.wrapper;
 
 import java.util.List;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import pt.isep.arqsoft.GorgeousSandwich.domain.review.Review;

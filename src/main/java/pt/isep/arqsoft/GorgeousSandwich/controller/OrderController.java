@@ -55,7 +55,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/email/{id}")
-    public List<OrderDTO> getByEmail(@PathVariable(value = "id") String email) throws ResourceNotFoundException{
+    public List<OrderDTO> getByEmail(@PathVariable(value = "id") String email) {
             List<Order> orders = orderRepository.getByEmail(email);
             return orderConverter.convertListToDTO(orders);
     }

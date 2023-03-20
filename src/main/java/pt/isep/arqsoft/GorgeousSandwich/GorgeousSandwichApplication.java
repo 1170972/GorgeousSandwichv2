@@ -6,9 +6,7 @@ import pt.isep.arqsoft.GorgeousSandwich.domain.order.DeliveryTime;
 import pt.isep.arqsoft.GorgeousSandwich.domain.review.Grade;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Properties;
 

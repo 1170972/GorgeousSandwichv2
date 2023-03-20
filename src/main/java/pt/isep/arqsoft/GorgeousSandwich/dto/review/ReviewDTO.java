@@ -12,10 +12,6 @@ public class ReviewDTO {
 
 	public String email;
 	
-	public ReviewDTO() {
-
-	}
-	
 	public ReviewDTO(Long reviewId, String description, Integer grade, Long sandwichId,String email) {
 		this.reviewId = reviewId;
 		this.description = description;

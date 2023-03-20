@@ -22,13 +22,6 @@ public class Quantity implements IValueObject<Quantity> {
 	public static Quantity valueOf(int units){
 		return new Quantity(units);
 	}
-
-	public void changeQuantity(int units) {
-		Validate.notNull(units, "Quantity units must not be null.");
-		Validate.isTrue(units > 0, "Quantity units must be superior than 0.");
-		Validate.isTrue(this.units != units,"Can't change to the same value");
-		this.units = units;
-	}
 	
 	@Override
 	public boolean equals(Object o) {

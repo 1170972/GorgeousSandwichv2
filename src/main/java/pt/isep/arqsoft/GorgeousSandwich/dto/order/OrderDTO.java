@@ -18,10 +18,6 @@ public class OrderDTO {
 
     public String email;
 
-    public OrderDTO(){
-
-    }
-
     public OrderDTO(String orderStatus, DeliveryTimeDTO deliveryTime,
                     String deliveryDate, String orderDate, Set<OrderItemDTO> orderItems,String email) {
         this.orderStatus = orderStatus;
