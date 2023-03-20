@@ -24,7 +24,6 @@ public class OrderRepositoryWrapperJPA {
 	}
 
 	public Order save(Order model) {
-		this.validateModel(model);
 		return this.mapper.convertToDomain(this.repository.save(this.mapper.convertToPersistence(model)));
 	}
 
@@ -33,7 +32,6 @@ public class OrderRepositoryWrapperJPA {
 	}
 
 	public Order update(Order model) {
-		this.validateModel(model);
 		return this.mapper.convertToDomain(this.repository.save(this.mapper.convertToPersistence(model)));
 	}
 
@@ -43,12 +41,6 @@ public class OrderRepositoryWrapperJPA {
 
 	public List<Order> getByEmail(String email) {
 		return this.mapper.convertListToDomain(this.repository.findByEmail(email));
-	}
-
-	private static void validateModel(Order model) {
-		DeliveryTime deliveryTime = model.obtainDeliveryTime();
-		DeliveryTimeDTO time = new DeliveryTimeDTO(deliveryTime.obtainStartTime().toString(),deliveryTime.obtainEndTime().toString());
-		Validate.isTrue(DeliveryTime.obtainPossibleIntervals().contains(time),"Invalid delivery time interval");
 	}
 
 }
