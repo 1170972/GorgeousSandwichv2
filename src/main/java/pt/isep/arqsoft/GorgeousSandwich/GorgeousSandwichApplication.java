@@ -33,7 +33,7 @@ public class GorgeousSandwichApplication {
 		SpringApplication.run(GorgeousSandwichApplication.class, args);
 	}
 
-	private static List<DeliveryTimeDTO> calculateIntervals(LocalTime openingHours, LocalTime closingHours, Integer interval){
+	public static List<DeliveryTimeDTO> calculateIntervals(LocalTime openingHours, LocalTime closingHours, Integer interval){
 		List<DeliveryTimeDTO> list = new ArrayList<>();
 		LocalTime hours = openingHours;
 		while(!hours.equals(closingHours)){
