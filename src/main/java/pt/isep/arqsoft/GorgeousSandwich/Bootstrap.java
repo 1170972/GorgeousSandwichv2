@@ -1,6 +1,7 @@
 package pt.isep.arqsoft.GorgeousSandwich;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Set;
 import java.util.TreeSet;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +10,8 @@ import pt.isep.arqsoft.GorgeousSandwich.controller.CommentController;
 import pt.isep.arqsoft.GorgeousSandwich.controller.OrderController;
 import pt.isep.arqsoft.GorgeousSandwich.controller.ReviewController;
 import pt.isep.arqsoft.GorgeousSandwich.controller.SandwichController;
+import pt.isep.arqsoft.GorgeousSandwich.domain.order.DeliveryTime;
+import pt.isep.arqsoft.GorgeousSandwich.domain.review.Grade;
 import pt.isep.arqsoft.GorgeousSandwich.dto.comment.CommentDTO;
 import pt.isep.arqsoft.GorgeousSandwich.dto.order.DeliveryTimeDTO;
 import pt.isep.arqsoft.GorgeousSandwich.dto.order.OrderDTO;
@@ -16,7 +19,7 @@ import pt.isep.arqsoft.GorgeousSandwich.dto.order.OrderItemDTO;
 import pt.isep.arqsoft.GorgeousSandwich.dto.review.ReviewDTO;
 import pt.isep.arqsoft.GorgeousSandwich.dto.sandwich.SandwichDTO;
 
-@Component
+//@Component
 public class Bootstrap implements CommandLineRunner {
 
     private SandwichController sandwichController;
@@ -33,6 +36,9 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        DeliveryTime.changePossibleIntervals(GorgeousSandwichApplication.calculateIntervals(LocalTime.parse("08:00"), LocalTime.parse("22:00"), 20));
+        Grade.changeMinMax(1, 5);
+
         System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " Starting the Creation of Sandwiches");
         SandwichDTO sandwich1 = sandwichController.createSandwich(new SandwichDTO(2, "salty", "Sandwich1 " + new java.util.Date().getTime(), "desc1"));
         SandwichDTO sandwich2 = sandwichController.createSandwich(new SandwichDTO(3, "salty", "Sandwich2 " + new java.util.Date().getTime(), "desc2"));
@@ -65,6 +71,14 @@ public class Bootstrap implements CommandLineRunner {
         sandwichController.getById(sandwich1.sandwichId);
         System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " 5 sandwiches details retrieved");
 
+        System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " Starting the Get The Rate Interval");
+        reviewController.getGradeMinAndMax();
+        reviewController.getGradeMinAndMax();
+        reviewController.getGradeMinAndMax();
+        reviewController.getGradeMinAndMax();
+        reviewController.getGradeMinAndMax();
+        System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " End of Get Rate Interval");
+
         System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " Starting the Review/Rate of Sandwiches");
         reviewController.createReview(new ReviewDTO("desc1", 1, sandwich1.sandwichId, "test@test.com"));
         reviewController.createReview(new ReviewDTO("desc2", 2, sandwich1.sandwichId, "test@test.com"));
@@ -80,14 +94,6 @@ public class Bootstrap implements CommandLineRunner {
         reviewController.listBySandwich(sandwich1.sandwichId);
         reviewController.listBySandwich(sandwich1.sandwichId);
         System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " End of Get List of Reviews");
-
-        System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " Starting the Get The Rate Interval");
-        reviewController.getGradeMinAndMax();
-        reviewController.getGradeMinAndMax();
-        reviewController.getGradeMinAndMax();
-        reviewController.getGradeMinAndMax();
-        reviewController.getGradeMinAndMax();
-        System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " End of Get Rate Interval");
 
         System.out.println(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new java.util.Date()) + " Starting the Comment a Sandwich");
         commentController.createComment(new CommentDTO("desc1", sandwich1.sandwichId, "test@test.com"));
